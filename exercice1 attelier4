@@ -1,0 +1,138 @@
+
+#include <iostream>
+using namespace std;
+
+class complexe { // class complex
+    double Re; // declaration variable : partie reel
+    double Img;// declaration variable : partie imaginaire
+
+public:
+    complexe(double a = 0, double b = 0) // constructeur paramétreé
+    {
+   // affectattion des parametres de la construteur à les varibles de la class
+          Re = a;
+
+        Img = b;
+    }
+    void afficher()
+    {
+    	cout <<" \n"<<Re ;
+
+    	//Pour ne pas afficher 5 + -5i (si Img est negatif)
+        if (Img >= 0)
+            cout << " + ";
+
+        cout << Img << "i\n" << endl;
+    }
+
+
+    // declaration d'Opérateur d'addition
+    complexe operator+(complexe a)
+    {
+        complexe s; // declaration d'un varible de type complexe
+        s.Re = Re + a.Re;
+        s.Img = Img + a.Img;
+        return s; // return s qui est le resultat de la somme
+    }
+    // declaration d'Opérateur de division
+    complexe operator /(complexe a)
+    {
+        complexe s;// declaration d'un varible de type complexe
+        if (a.Img==0){
+       s.Re= Re/a.Re;
+        s.Img = Img /a.Re;
+     }
+   else if (a.Re==0){
+        s.Re= Img /a.Img ;
+       s.Img = -Re/a.Img;
+     }
+   else{
+  s.Re = ( Re*a.Re + Img *a.Img)/ (a.Re*a.Re + a.Img*a.Img);
+   s.Img = ((Img *a.Re) + (Re *a.Img)) / ((a.Re*a.Re) + (a.Img*a.Img));
+
+    }return s;}
+
+
+
+   // declaration d'Opérateur de Soustraction
+    complexe operator-(complexe a)
+    {
+        complexe s;
+        s.Re = Re - a.Re;
+        s.Img = Img - a.Img;
+        return s;
+    }
+
+  // declaration d'Opérateur de multiplication
+    complexe operator*(complexe a)
+    {
+        complexe p;
+        p.Re = Re * a.Re - Img * a.Img;
+        p.Img = Re * a.Img + Img * a.Re;
+        return p;
+    }
+};
+
+int main()
+{double a1, b1, a2, b2;
+    cout<<"entrer la partie reel du nombre1 : ";// demender d'entrer premiere nombre complexe
+         cin >>a1;
+          cout<<"entrer la partie imaginaire du nombre1 : ";
+     cin >>b1;
+     cout<<"entrer la partie reel du nombre2 : ";// demender d'entrer premiere nombre complexe
+         cin >>a2;
+          cout<<"entrer la partie imaginaire du nombre2 : ";
+     cin >>b2;
+     complexe a(a1, b1), b(a2,b2) , c;
+    cout << "Complexe A = ";
+    a.afficher();
+    cout << "B = ";
+    b.afficher();
+
+     int menu ; // declaration  variable du notre menu
+do // boucle de while pour a chaque fois on afiche le menu avec une condition de menu superieur a zero si inferieur on sort de menu et boucle
+    {
+        cout<<endl<<" ------------- MENU ------------"<<endl<<endl; // donne le coix a l'utilisteur de choisir le numero cnvient
+        cout<<"1.soustraction"<<endl;
+        cout<<"2. addition"<<endl;
+        cout<<"3. division "<<endl;
+        cout<<"4. multiplication"<<endl;
+        cout<<"0. Quitter"<<endl<<endl;
+        cout<<"Choix : ";
+        cin>>menu;
+        cout<<endl;
+ switch(menu) // entre dans le menu
+        {
+             case 0 : break;
+
+            case 1 :cout << "***********soustraction********** \n";
+                cout << "B - A = ";
+    c = (b - a);
+	c.afficher();
+
+            break;
+
+            case 2 :cout << "***********addition********** \n";
+                 cout << "A + B = ";
+    c = (a + b); // appel à l'operateur "+"
+	c.afficher(); // appel a la fonction afficher
+
+            break;
+
+            case 3 :cout << "***********division********** \n";
+                cout << "B / A = ";
+    c = (b / a); // appel à l'operateur "/"
+	c.afficher(); // appel a la fonction afficher
+
+            break;
+             case 4 :cout << "***********multiplication********** \n";
+                 cout << "A * B = ";
+           c = (a * b);// appel à l'operateur "*"
+	c.afficher(); // appel a la fonction afficher
+
+
+   } }while (menu!=0);// si l'utilisateur tappe 0 , il sort de boucle
+}
+
+
+
