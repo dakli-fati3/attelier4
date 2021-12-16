@@ -1,0 +1,41 @@
+#include <iostream>
+#include<list>  // bibliotheque list qui contient des fonction comme 'sort();'
+#include<iterator>// itérateurs permettent de pointer sur les adresses mémoire des conteneurs STL .
+
+
+using namespace std;
+void afficher_list (list <int> L1){
+list<int>::iterator it ; // declaration de it un pointeur
+/*begin() :- Cette fonction est utilisée pour retourner la position de début du conteneur.
+ end() :- Cette fonction est utilisée pour retourner la position finale après le conteneur.*/
+
+for(it=L1.begin();it!=L1.end();++it) // fonction d'affichage
+ cout << "\t" << *it ;
+  cout << "\n"  ;
+}
+
+int main()
+{
+    list <int> gqlist1; // declaration de liste
+     int q;
+     char T;
+for (int i = 0; i < 5; ++i) // remplissage de liste par 5 entier de 1 à 5
+{
+  cout << "********entrer un nombre entier*******\n"  ;
+  cin >>q;
+
+gqlist1.push_back(q);// fonction remplissage
+
+}
+ afficher_list(gqlist1); // appel fonction d'affichage
+ cout << "********tapper 't' pour afficher la liste triee*******\n"  ;
+  cin >>T;
+  if (T=='t'){ // pour donner a lutilisateur de un temp d'affichage
+    cout << "\nla liste triee ";
+gqlist1.sort(); // appel fonction de trie de liste
+afficher_list(gqlist1); // liste apres trie
+  }
+
+
+    return 0;
+}
